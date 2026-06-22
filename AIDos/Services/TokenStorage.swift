@@ -1,16 +1,14 @@
 import Foundation
+import Combine
 
-final class TokenStorage {
+final class TokenStorage: ObservableObject {
     static let shared = TokenStorage()
     
-    private init() {}
+    @Published var token: String? {
+            didSet { UserDefaults.standard.set(token, forKey: "jwt_token") }
+        }
     
-    var token: String? {
-        get {
-            UserDefaults.standard.string(forKey: "jwt_token")
-        }
-        set {
-            UserDefaults.standard.set(newValue, forKey: "jwt_token")
-        }
+    private init() {
+        self.token = UserDefaults.standard.string(forKey: "jwt_token")
     }
 }

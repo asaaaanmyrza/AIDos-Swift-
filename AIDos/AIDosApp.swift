@@ -9,9 +9,12 @@ import SwiftUI
 
 @main
 struct AIDosApp: App {
+    @StateObject private var authVM = AuthViewModel()
+    
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            RootView()
+                .environmentObject(authVM)
         }
     }
 }

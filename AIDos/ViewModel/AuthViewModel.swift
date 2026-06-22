@@ -7,7 +7,6 @@ final class AuthViewModel: ObservableObject {
     @Published var email = ""
     @Published var password = ""
     
-    @Published var isAuthenticated = false
     @Published var isLoading = false
     
     func register() async {
@@ -16,7 +15,7 @@ final class AuthViewModel: ObservableObject {
             let auth = try await NetworkService.shared.register(
                 email: email,
                 password: password)
-            print(auth.user.email)
+            print("Successful register: \(auth.user.email)")
         } catch {
             print(error.localizedDescription)
         }
@@ -30,9 +29,10 @@ final class AuthViewModel: ObservableObject {
                 email: email,
                 password: password
                 )
-            print(auth.user.email)
+            print("Successful login: \(auth.user.email)")
         } catch {
             print(error.localizedDescription)
+            print("email: \(email), password: \(password)")
         }
         isLoading = false
     }

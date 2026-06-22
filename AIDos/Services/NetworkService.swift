@@ -90,6 +90,9 @@ extension NetworkService {
         
         TokenStorage.shared.token = response.token
         
+        print(response)
+        print(String(data: data, encoding: .utf8) ?? "")
+        
         return response
     }
     
@@ -112,6 +115,9 @@ extension NetworkService {
         )
         
         TokenStorage.shared.token = response.token
+        
+        print(response)
+        print(String(data: data, encoding: .utf8) ?? "")
         
         return response
     }
