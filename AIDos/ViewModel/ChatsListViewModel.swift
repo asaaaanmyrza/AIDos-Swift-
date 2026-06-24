@@ -7,6 +7,7 @@ final class ChatsListViewModel: ObservableObject {
     @Published var isLoading = false
     
     let auth: AuthViewModel
+    let networkService = NetworkService.shared
     
     init() {
         self.auth = AuthViewModel()
@@ -15,7 +16,7 @@ final class ChatsListViewModel: ObservableObject {
     func fetchChats() async {
         isLoading = true
         do {
-            chats = try await NetworkService.shared.fetchChats()
+            chats = try await networkService.fetchChats()
         } catch {
             print(error.localizedDescription)
         }
@@ -24,7 +25,7 @@ final class ChatsListViewModel: ObservableObject {
     
     func createChat(title: String?) async -> Chat? {
         do {
-            let chat = try await NetworkService.shared.createChat(title: title)
+            let chat = try await networkService.createChat(title: title)
             chats.insert(chat, at: 0)
             return chat
         } catch {

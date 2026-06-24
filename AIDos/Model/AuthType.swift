@@ -1,8 +1,6 @@
-//
-//  AuthType.swift
-//  AIDos
-//
-//  Created by Асан Мырзахметов on 24.06.2026.
-//
-
 import Foundation
+
+enum AuthType: String, CaseIterable {
+    case login = "Войти"
+    case register = "Создать аккаунт"
+}
