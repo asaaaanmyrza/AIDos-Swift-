@@ -26,7 +26,10 @@ final class ChatsListViewModel: ObservableObject {
     func createChat(title: String?) async -> Chat? {
         do {
             let chat = try await networkService.createChat(title: title)
-            chats.insert(chat, at: 0)
+            chats.insert(
+                chat,
+                at: 0
+            )
             return chat
         } catch {
             print(error.localizedDescription)

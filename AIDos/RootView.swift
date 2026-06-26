@@ -9,11 +9,12 @@ struct RootView: View {
             AuthView()
                 .environmentObject(AuthViewModel())
         } else {
-            Text("PLACEHOLDER WELCOME")
+            ChatsListView()
         }
     }
 }
 
 #Preview {
+//    @ObservedObject var testToken = TokenStorage(token: nil)
     RootView()
 }

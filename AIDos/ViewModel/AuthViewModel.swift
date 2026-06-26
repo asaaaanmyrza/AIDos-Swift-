@@ -38,4 +38,8 @@ final class AuthViewModel: ObservableObject {
         }
         isLoading = false
     }
+    
+    func logout() {
+        TokenStorage.shared.token = nil
+    }
 }

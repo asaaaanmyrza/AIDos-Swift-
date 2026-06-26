@@ -11,4 +11,8 @@ final class TokenStorage: ObservableObject {
     private init() {
         self.token = UserDefaults.standard.string(forKey: "jwt_token")
     }
+    
+//    init(token: String?) {
+//        self.token = token
+//    }
 }
