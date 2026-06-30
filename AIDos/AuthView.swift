@@ -15,32 +15,17 @@ struct AuthView: View {
     var body: some View {
         ZStack {
             Color.background
-            RoundedRectangle(cornerRadius: 60)
-                .alignmentGuide(VerticalAlignment.center, computeValue: { _ in 600 })
-                .frame(height: 400)
-                .foregroundStyle(Color.accentPurple)
             VStack {
-                Picker("Scenario", selection: $authType) {
-                    ForEach(AuthType.allCases, id: \.self) {
-                        Text($0.rawValue)
-                            .foregroundStyle(.white)
+                header()
+                ScrollView {
+                    VStack {
+                        authChooser()
+                        emailField()
+                        passwordField()
+                        authButton(for: authType)
+                            .padding(.top, 15)
                     }
                 }
-                .pickerStyle(.segmented)
-//                .colorMultiply(.accentPurple)
-                .frame(width: 300)
-                .padding(10)
-                TextField("Электронная почта", text: $email)
-                    .textContentType(.emailAddress)
-                    .keyboardType(.emailAddress)
-                    .autocapitalization(.none)
-                    .padding(15)
-                    .background(.white)
-                    .cornerRadius(20)
-                    .padding(2)
-                    .padding(.horizontal)
-                passwordField()
-                authButton(for: authType)
             }
         }
         .ignoresSafeArea()
@@ -49,6 +34,31 @@ struct AuthView: View {
 }
 
 extension AuthView {
+    //AUTH TYPE PICKER
+    func authChooser() -> some View {
+        Picker("Scenario", selection: $authType) {
+            ForEach(AuthType.allCases, id: \.self) {
+                Text($0.rawValue)
+                    .foregroundStyle(.white)
+            }
+        }
+        .pickerStyle(.segmented)
+        .frame(width: 300)
+        .padding(.bottom, 10)
+    }
+    //EMAIL TEXTFIELD
+    func emailField() -> some View {
+        TextField("Электронная почта", text: $email)
+            .textContentType(.emailAddress)
+            .keyboardType(.emailAddress)
+            .autocapitalization(.none)
+            .padding(15)
+            .background(.white)
+            .cornerRadius(20)
+            .padding(2)
+            .padding(.horizontal)
+    }
+    //BUTTON FOR AUTH
     func authButton(for type: AuthType) -> some View {
         return Button(type.rawValue) {
             viewModel.email = email
@@ -62,7 +72,8 @@ extension AuthView {
                 
             }
         }
-        .frame(width: 200, height: 50, alignment: .center)
+        .font(.title2)
+        .frame(width: 250, height: 70, alignment: .center)
         .background(.accentPurple)
         .cornerRadius(20)
         .foregroundStyle(Color.white)
@@ -71,6 +82,7 @@ extension AuthView {
         .lineLimit(1)
     }
     
+    //PASSWORD TEXTFIELD
     func passwordField() -> some View {
         return ZStack (alignment: .trailing) {
             Group {
@@ -99,6 +111,32 @@ extension AuthView {
         .padding(.horizontal)
         .padding(.bottom, 60)
         .padding(2)
+    }
+    
+    // HEADER
+    func header() -> some View {
+        return ZStack (alignment: .top) {
+            RoundedRectangle(cornerRadius: 60)
+                .fill(LinearGradient(
+                    colors: [
+                        .accentPurple.opacity(0.8),
+                        .accentPurple
+                    ],
+                    startPoint: .topLeading,
+                    endPoint: .bottomTrailing))
+                .frame(width: .infinity, height: 500)
+                .frame(height: 180, alignment: .bottom)
+                .clipped()
+            VStack {
+                Text ("AI Dos")
+                    .foregroundStyle(.white)
+                    .bold()
+                    .font(.largeTitle)
+                Text ("Your mental assistant")
+                    .foregroundStyle(.white)
+            }
+            .padding(.top, 75)
+        }
     }
 }
 

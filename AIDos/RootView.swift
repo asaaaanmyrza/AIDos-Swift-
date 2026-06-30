@@ -9,7 +9,7 @@ struct RootView: View {
             AuthView()
                 .environmentObject(AuthViewModel())
         } else {
-            ChatsListView()
+            MainView()
         }
     }
 }

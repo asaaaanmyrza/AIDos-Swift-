@@ -15,6 +15,9 @@ struct AIDosApp: App {
         WindowGroup {
             RootView()
                 .environmentObject(authVM)
+                .task {
+                    authVM.logout()
+                }
         }
     }
 }
